@@ -24,6 +24,8 @@ public class IntervalController {
     public void addInterval(@RequestParam String kind, @RequestBody ArrayList<Object[]> request) {
         if (IntervalDataType.valueOf(kind) == IntervalDataType.digits) {
             digitsIntervalService.addNewIntervals(request);
+        } else if (IntervalDataType.valueOf(kind) == IntervalDataType.letters) {
+            lettersIntervalService.addNewIntervals(request);
         }
     }
 

@@ -14,12 +14,18 @@ public class ListConverter {
         return ret;
     }
 
-    public static <T> T[] convertToArray(Object[] objectArray, Class<T> clazz){
+    public static <T> T[] convertToArray(Object[] objectArray, Class<T> clazz) {
         @SuppressWarnings("unchecked")
-        T[] array = (T[]) newInstance(clazz, objectArray.length);
-        for (int i = 0; i < objectArray.length; i++){
-            array[i] = clazz.cast(objectArray[i]);
+        T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, objectArray.length);
+        for (int i = 0; i < objectArray.length; i++) {
+            if (clazz == Character.class && objectArray[i] instanceof String string) {
+                char[] charArray = string.toCharArray();
+                array[i] = clazz.cast(charArray[0]);
+            } else {
+                array[i] = clazz.cast(objectArray[i]);
+            }
         }
         return array;
     }
+
 }
