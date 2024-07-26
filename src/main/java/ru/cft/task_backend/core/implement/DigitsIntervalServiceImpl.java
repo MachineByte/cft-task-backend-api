@@ -3,7 +3,9 @@ package ru.cft.task_backend.core.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
+import ru.cft.task_backend.core.exceptions.NotFoundException;
 import ru.cft.task_backend.core.repositories.DigitsIntervalRepository;
 import ru.cft.task_backend.core.services.DigitsIntervalService;
 import ru.cft.task_backend.models.DigitsIntervalEntity;
@@ -11,6 +13,7 @@ import ru.cft.task_backend.models.DigitsIntervalEntity;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,12 +36,7 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
     public List<int[]> collapseIntersections(List<int[]> list) throws BadRequestException{
         List<int[]> result = new ArrayList<>();
 
-        list = list
-                .stream()
-                .sorted(
-                        Comparator.comparingInt(arr -> arr[0])
-                )
-                .toList();
+        list = list.stream().sorted(Comparator.comparingInt(arr -> arr[0])) .toList();
 
         int[] current = list.getFirst();
 
@@ -49,7 +47,7 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
         for (int i = 1; i < list.size(); i++) {
             int[] next = list.get(i);
 
-            if (next.length != 2 || current.length != 2) {
+            if (next.length != 2) {
                 throw new BadRequestException("Incorrect interval");
             }
             if (current[1] >= next[0]) {
@@ -64,6 +62,19 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
         return result;
     }
 
+    @Override
+    public MinDigitsIntervalResponse findMinInterval() {
+        Optional<DigitsIntervalEntity> interval = intervalRepository.findMinInterval();
+        return interval.map(
+                digitsIntervalEntity -> MinDigitsIntervalResponse
+                    .builder()
+                    .start(digitsIntervalEntity.getStart())
+                    .end(digitsIntervalEntity.getEnd())
+                    .build()
+                )
+                .orElse(null);
+    }
+
     private void saveIntArray(int[] array) {
         intervalRepository.save(
                 DigitsIntervalEntity
@@ -72,5 +83,7 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
                         .end(array[1])
                         .build()
         );
+
+        System.out.println("saved");
     }
 }

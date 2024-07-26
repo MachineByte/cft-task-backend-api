@@ -1,12 +1,11 @@
 package ru.cft.task_backend.api.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
+import ru.cft.task_backend.core.exceptions.BadRequestException;
 import ru.cft.task_backend.core.services.DigitsIntervalService;
-import ru.cft.task_backend.models.IntervalDataType;
+import ru.cft.task_backend.models.enums.IntervalDataType;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,13 +14,23 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class IntervalController {
     private final String POST_INTERVAL = "/api/v1/intervals/merge";
+    private final String FIND_MIN_INTERVAL = "/api/v1/intervals/min";
 
     private final DigitsIntervalService intervalService;
 
     @PostMapping(POST_INTERVAL)
     public void addInterval(@RequestParam String kind, @RequestBody List<int[]> request){
-        if(Objects.equals(kind, IntervalDataType.DIGITS.toString().toLowerCase())){
+        if(IntervalDataType.valueOf(kind) == IntervalDataType.digits){
             intervalService.addNewIntervals(request);
         }
+    }
+
+    @GetMapping(FIND_MIN_INTERVAL)
+    public MinDigitsIntervalResponse getMinInterval(@RequestParam String kind){
+        if(IntervalDataType.valueOf(kind) == IntervalDataType.digits){
+            return intervalService.findMinInterval();
+        }
+
+        throw  new BadRequestException("lhjgly");
     }
 }
