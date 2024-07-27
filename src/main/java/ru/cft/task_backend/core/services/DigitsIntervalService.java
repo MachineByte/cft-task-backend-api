@@ -8,6 +8,5 @@ import java.util.Optional;
 
 public interface DigitsIntervalService {
     void addNewIntervals(List<Object[]> request);
-    List<Integer[]> collapseIntersections(List<Integer[]> list);
     MinDigitsIntervalResponse findMinInterval();
 }

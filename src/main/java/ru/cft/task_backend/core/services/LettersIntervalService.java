@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface LettersIntervalService {
     void addNewIntervals(List<Object[]> request);
-    List<Character[]> collapseIntersections(List<Character[]> list);
     MinLettersIntervalResponse findMinInterval();
 }
