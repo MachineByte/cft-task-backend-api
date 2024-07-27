@@ -2,8 +2,8 @@ package ru.cft.task_backend.core.implement;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.api.dto.MinLettersIntervalResponse;
 import ru.cft.task_backend.core.converters.ListConverter;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class LettersIntervalServiceImpl implements LettersIntervalService {
     private final LettersIntervalRepository intervalRepository;
 
@@ -32,6 +33,7 @@ public class LettersIntervalServiceImpl implements LettersIntervalService {
         List<Character[]> collapsed = collapseIntersections(list);
 
         collapsed.forEach(this::saveIntArray);
+        log.info("Letters saved in database successfully");
     }
 
     @Override
@@ -85,7 +87,5 @@ public class LettersIntervalServiceImpl implements LettersIntervalService {
                         .end(array[1])
                         .build()
         );
-
-        System.out.println("saved");
     }
 }

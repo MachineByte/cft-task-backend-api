@@ -2,7 +2,6 @@ package ru.cft.task_backend.api.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.api.dto.MinIntervalResponse;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
 import ru.cft.task_backend.core.services.DigitsIntervalService;
@@ -10,7 +9,6 @@ import ru.cft.task_backend.core.services.LettersIntervalService;
 import ru.cft.task_backend.models.enums.IntervalDataType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

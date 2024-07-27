@@ -2,6 +2,7 @@ package ru.cft.task_backend.core.implement;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.core.converters.ListConverter;
@@ -15,6 +16,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DigitsIntervalServiceImpl implements DigitsIntervalService {
     private final DigitsIntervalRepository intervalRepository;
 
@@ -28,6 +30,7 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
         List<Integer[]> collapsed = collapseIntersections(list);
 
         collapsed.forEach(this::saveIntArray);
+        log.info("Digits saved in database successfully");
     }
 
     @Override
@@ -82,6 +85,6 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
                         .build()
         );
 
-        System.out.println("saved");
+
     }
 }

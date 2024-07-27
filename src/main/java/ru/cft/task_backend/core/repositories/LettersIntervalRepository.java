@@ -2,7 +2,6 @@ package ru.cft.task_backend.core.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.cft.task_backend.models.DigitsIntervalEntity;
 import ru.cft.task_backend.models.LettersIntervalEntity;
 
 import java.util.Optional;
