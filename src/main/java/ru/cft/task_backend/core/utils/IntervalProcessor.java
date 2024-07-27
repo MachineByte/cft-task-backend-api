@@ -1,6 +1,7 @@
 package ru.cft.task_backend.core.utils;
 
 import ru.cft.task_backend.core.exceptions.BadRequestException;
+import ru.cft.task_backend.core.exceptions.BadStateException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,14 +28,14 @@ public class IntervalProcessor {
         T[] currentInterval = list.get(0);
 
         if (currentInterval.length != 2) {
-            throw new BadRequestException("Incorrect interval: " + Arrays.toString(currentInterval));
+            throw new BadStateException("Incorrect interval: " + Arrays.toString(currentInterval));
         }
 
         for (int i = 1; i < list.size(); i++) {
             T[] nextInterval = list.get(i);
 
             if (nextInterval.length != 2) {
-                throw new BadRequestException("Incorrect interval: " + Arrays.toString(nextInterval));
+                throw new BadStateException("Incorrect interval: " + Arrays.toString(nextInterval));
             }
 
             if (currentInterval[1].compareTo(nextInterval[0]) < 0) { // Intervals don't overlap
