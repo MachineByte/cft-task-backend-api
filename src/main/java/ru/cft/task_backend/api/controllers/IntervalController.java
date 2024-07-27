@@ -3,6 +3,7 @@ package ru.cft.task_backend.api.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
+import ru.cft.task_backend.api.dto.MinIntervalResponse;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
 import ru.cft.task_backend.core.services.DigitsIntervalService;
 import ru.cft.task_backend.core.services.LettersIntervalService;
@@ -30,7 +31,7 @@ public class IntervalController {
     }
 
     @GetMapping(FIND_MIN_INTERVAL)
-    public MinDigitsIntervalResponse getMinInterval(@RequestParam String kind){
+    public MinIntervalResponse getMinInterval(@RequestParam String kind){
         if(IntervalDataType.valueOf(kind) == IntervalDataType.digits){
             return digitsIntervalService.findMinInterval();
         } else if (IntervalDataType.valueOf(kind) == IntervalDataType.letters){

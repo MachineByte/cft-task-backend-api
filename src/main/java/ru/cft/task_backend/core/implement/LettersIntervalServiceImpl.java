@@ -4,13 +4,11 @@ package ru.cft.task_backend.core.implement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
+import ru.cft.task_backend.api.dto.MinLettersIntervalResponse;
 import ru.cft.task_backend.core.converters.ListConverter;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
-import ru.cft.task_backend.core.repositories.DigitsIntervalRepository;
 import ru.cft.task_backend.core.repositories.LettersIntervalRepository;
-import ru.cft.task_backend.core.services.DigitsIntervalService;
 import ru.cft.task_backend.core.services.LettersIntervalService;
-import ru.cft.task_backend.models.DigitsIntervalEntity;
 import ru.cft.task_backend.models.LettersIntervalEntity;
 
 import java.util.ArrayList;
@@ -66,13 +64,13 @@ public class LettersIntervalServiceImpl implements LettersIntervalService {
     }
 
     @Override
-    public MinDigitsIntervalResponse findMinInterval() {
+    public MinLettersIntervalResponse findMinInterval() {
         Optional<LettersIntervalEntity> interval = intervalRepository.findMinInterval();
         return interval.map(
-                digitsIntervalEntity -> MinDigitsIntervalResponse
+                lettersIntervalEntity -> MinLettersIntervalResponse
                     .builder()
-                    .start(digitsIntervalEntity.getStart())
-                    .end(digitsIntervalEntity.getEnd())
+                    .start(lettersIntervalEntity.getStart())
+                    .end(lettersIntervalEntity.getEnd())
                     .build()
                 )
                 .orElse(null);

@@ -16,7 +16,7 @@ public class ListConverter {
 
     public static <T> T[] convertToArray(Object[] objectArray, Class<T> clazz) {
         @SuppressWarnings("unchecked")
-        T[] array = (T[]) java.lang.reflect.Array.newInstance(clazz, objectArray.length);
+        T[] array = (T[]) newInstance(clazz, objectArray.length);
         for (int i = 0; i < objectArray.length; i++) {
             if (clazz == Character.class && objectArray[i] instanceof String string) {
                 char[] charArray = string.toCharArray();

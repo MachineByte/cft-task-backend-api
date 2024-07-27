@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class MinLettersIntervalResponse {
+public class MinLettersIntervalResponse implements MinIntervalResponse {
     char start;
     char end;
 }

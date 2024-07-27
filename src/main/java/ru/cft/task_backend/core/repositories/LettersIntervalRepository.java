@@ -8,12 +8,11 @@ import ru.cft.task_backend.models.LettersIntervalEntity;
 import java.util.Optional;
 
 public interface LettersIntervalRepository extends JpaRepository<LettersIntervalEntity, Integer> {
-    String FIND_MIN_INTERVAL_QUERY = "SELECT d FROM DigitsIntervalEntity d " +
-            "WHERE d.end = (SELECT MIN(d2.end) FROM DigitsIntervalEntity d2) " +
-            "AND d.start = (SELECT MIN(d2.start) FROM DigitsIntervalEntity d2) " +
-            "ORDER BY d " +
+    String FIND_MIN_INTERVAL_NATIVE_QUERY = "SELECT * FROM LETTERS_INTERVAL_ENTITY  " +
+            "WHERE START_VALUE = (SELECT MIN(START_VALUE) FROM LETTERS_INTERVAL_ENTITY ) " +
+            "AND END_VALUE = (SELECT MIN(END_VALUE) FROM LETTERS_INTERVAL_ENTITY ) " +
             "LIMIT 1";
 
-    @Query(FIND_MIN_INTERVAL_QUERY)
+    @Query(nativeQuery = true, value = FIND_MIN_INTERVAL_NATIVE_QUERY)
     Optional<LettersIntervalEntity> findMinInterval();
 }
