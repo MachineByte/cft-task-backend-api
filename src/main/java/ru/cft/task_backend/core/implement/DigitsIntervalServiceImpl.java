@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.core.converters.ListConverter;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
+import ru.cft.task_backend.core.exceptions.BadStateException;
 import ru.cft.task_backend.core.repositories.DigitsIntervalRepository;
 import ru.cft.task_backend.core.services.DigitsIntervalService;
 import ru.cft.task_backend.models.DigitsIntervalEntity;
@@ -38,14 +39,14 @@ public class DigitsIntervalServiceImpl implements DigitsIntervalService {
         Integer[] current = list.getFirst();
 
         if(current.length != 2){
-            throw new BadRequestException("Incorrect interval");
+            throw new BadStateException("Incorrect interval");
         }
 
         for (int i = 1; i < list.size(); i++) {
             Integer[] next = list.get(i);
 
             if (next.length != 2) {
-                throw new BadRequestException("Incorrect interval");
+                throw new BadStateException("Incorrect interval");
             }
             if (current[1] >= next[0]) {
                 current[1] = Math.max(current[1], next[1]);

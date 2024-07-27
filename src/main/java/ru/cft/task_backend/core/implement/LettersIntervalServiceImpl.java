@@ -7,6 +7,7 @@ import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.api.dto.MinLettersIntervalResponse;
 import ru.cft.task_backend.core.converters.ListConverter;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
+import ru.cft.task_backend.core.exceptions.BadStateException;
 import ru.cft.task_backend.core.repositories.LettersIntervalRepository;
 import ru.cft.task_backend.core.services.LettersIntervalService;
 import ru.cft.task_backend.models.LettersIntervalEntity;
@@ -42,14 +43,14 @@ public class LettersIntervalServiceImpl implements LettersIntervalService {
         Character[] current = list.getFirst();
 
         if(current.length != 2){
-            throw new BadRequestException("Incorrect interval");
+            throw new BadStateException("Incorrect interval");
         }
 
         for (int i = 1; i < list.size(); i++) {
             Character[] next = list.get(i);
 
             if (next.length != 2) {
-                throw new BadRequestException("Incorrect interval");
+                throw new BadStateException("Incorrect interval");
             }
             if (current[1] >= next[0]) {
                 current[1] = (char) Math.max(current[1], next[1]);

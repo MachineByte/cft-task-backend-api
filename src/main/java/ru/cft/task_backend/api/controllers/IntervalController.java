@@ -38,6 +38,6 @@ public class IntervalController {
             return lettersIntervalService.findMinInterval();
         }
 
-        throw  new BadRequestException("lhjgly");
+        throw new BadRequestException("Kind is not supported");
     }
 }
