@@ -18,14 +18,10 @@ public class IntervalProcessor {
      * @throws BadRequestException if the intervals are not valid.
      */
     public static <T extends Comparable<T>> List<T[]> collapseIntersections(List<T[]> list, Comparator<T[]> comparator) {
-        if (list == null || list.isEmpty()) {
-            return Collections.emptyList();
-        }
-
         List<T[]> result = new ArrayList<>();
         list = list.stream().sorted(comparator).collect(Collectors.toList()); // Sorting an input list
 
-        T[] currentInterval = list.get(0);
+        T[] currentInterval = list.getFirst();
 
         if (currentInterval.length != 2) {
             throw new BadStateException("Incorrect interval: " + Arrays.toString(currentInterval));
@@ -41,10 +37,8 @@ public class IntervalProcessor {
             if (currentInterval[1].compareTo(nextInterval[0]) < 0) { // Intervals don't overlap
                 result.add(currentInterval);
                 currentInterval = nextInterval;
-            } else {
-                if (currentInterval[1].compareTo(nextInterval[1]) <= 0) { // Intervals overlap
-                    currentInterval[1] = nextInterval[1]; // Merge intervals
-                }
+            } else if (currentInterval[1].compareTo(nextInterval[1]) <= 0) { // Intervals overlap
+                currentInterval[1] = nextInterval[1]; // Merge intervals
             }
         }
 

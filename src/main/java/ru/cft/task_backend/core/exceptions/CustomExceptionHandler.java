@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> exception(Exception ex, WebRequest request) throws Exception {
-        log.error("Exception during execution an application: {}", ex);
-        return handleException(ex, request); //method of super class
+        log.error("Exception during execution an application: {}", ex.getMessage());
+        return handleException(ex, request); //method of superclass
     }
 }
