@@ -22,13 +22,13 @@ public class IntervalController {
     @Operation(summary = "Add new intervals", description = "Adds new intervals of the specified kind (digits or letters).")
     @PostMapping(POST_INTERVAL)
     public void addInterval(@RequestParam String kind, @RequestBody ArrayList<Object[]> request) {
-        intervalService.addNewIntervals(request, IntervalDataType.valueOf(kind.trim()));
+        intervalService.addNewIntervals(request, kind);
 
     }
 
     @Operation(summary = "Find minimum interval", description = "Finds the minimum interval of the specified kind (digits or letters).")
     @GetMapping(FIND_MIN_INTERVAL)
     public MinIntervalResponse getMinInterval(@RequestParam String kind){
-        return intervalService.findMinInterval(IntervalDataType.valueOf(kind.trim()));
+        return intervalService.findMinInterval(kind);
     }
 }

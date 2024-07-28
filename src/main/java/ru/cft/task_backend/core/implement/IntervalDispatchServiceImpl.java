@@ -20,24 +20,34 @@ public class IntervalDispatchServiceImpl implements IntervalDispatchService {
     private final LettersIntervalService lettersIntervalService;
 
     @Override
-    public void addNewIntervals(List<Object[]> request, IntervalDataType type) {
-        if(type == IntervalDataType.digits){
-            digitsIntervalService.addNewIntervals(request);
-        } else if(type == IntervalDataType.letters){
-            lettersIntervalService.addNewIntervals(request);
-        } else {
-            throw new BadRequestException("Kind is not supported");
+    public void addNewIntervals(List<Object[]> request, String type) {
+
+        IntervalDataType dataType = getIntervalDataType(type);
+
+        switch (dataType){
+            case DIGITS -> digitsIntervalService.addNewIntervals(request);
+            case LETTERS -> lettersIntervalService.addNewIntervals(request);
         }
     }
 
     @Override
-    public MinIntervalResponse findMinInterval(IntervalDataType type) {
-        if(type == IntervalDataType.digits){
-            return digitsIntervalService.findMinInterval();
-        } else if(type == IntervalDataType.letters){
-            return lettersIntervalService.findMinInterval();
-        } else {
-            throw new BadRequestException("Kind is not supported");
+    public MinIntervalResponse findMinInterval(String type) {
+        IntervalDataType dataType = getIntervalDataType(type);
+
+        return switch (dataType){
+            case DIGITS -> digitsIntervalService.findMinInterval();
+            case LETTERS -> lettersIntervalService.findMinInterval();
+        };
+
+    }
+
+    private static IntervalDataType getIntervalDataType(String type) {
+        IntervalDataType dataType;
+        try {
+            dataType = IntervalDataType.valueOf(type.trim().toUpperCase());
+        } catch (IllegalArgumentException  e){
+            throw new BadRequestException("Kind " + type + " is not supported");
         }
+        return dataType;
     }
 }
