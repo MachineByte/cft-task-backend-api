@@ -41,7 +41,7 @@ public class IntervalDispatchServiceImpl implements IntervalDispatchService {
 
     }
 
-    private static IntervalDataType getIntervalDataType(String type) {
+    private IntervalDataType getIntervalDataType(String type) {
         IntervalDataType dataType;
         try {
             dataType = IntervalDataType.valueOf(type.trim().toUpperCase());

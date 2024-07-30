@@ -8,16 +8,11 @@ import ru.cft.task_backend.api.dto.MinDigitsIntervalResponse;
 import ru.cft.task_backend.core.utils.IntervalProcessor;
 import ru.cft.task_backend.core.utils.ListConverter;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
-import ru.cft.task_backend.core.exceptions.BadStateException;
 import ru.cft.task_backend.core.repositories.DigitsIntervalRepository;
 import ru.cft.task_backend.core.services.DigitsIntervalService;
 import ru.cft.task_backend.models.DigitsIntervalEntity;
 
 import java.util.*;
-
-/**
- * Service implementation for managing digit intervals.
- */
 
 @Service
 @RequiredArgsConstructor

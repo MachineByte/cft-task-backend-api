@@ -8,7 +8,6 @@ import ru.cft.task_backend.api.dto.MinLettersIntervalResponse;
 import ru.cft.task_backend.core.utils.IntervalProcessor;
 import ru.cft.task_backend.core.utils.ListConverter;
 import ru.cft.task_backend.core.exceptions.BadRequestException;
-import ru.cft.task_backend.core.exceptions.BadStateException;
 import ru.cft.task_backend.core.repositories.LettersIntervalRepository;
 import ru.cft.task_backend.core.services.LettersIntervalService;
 import ru.cft.task_backend.models.LettersIntervalEntity;
@@ -29,7 +28,7 @@ public class LettersIntervalServiceImpl implements LettersIntervalService {
         }
         List<Character[]> list = ListConverter.convertToTypedList(request, Character.class);
         List<Character[]> collapsed = IntervalProcessor.collapseIntersections(list, Comparator.comparing(element -> element[0]));
-        collapsed.forEach(this::saveIntArray);
+        collapsed.forEach(this::saveCharArray);
         log.info("Letters saved in database successfully");
     }
 
@@ -49,7 +48,7 @@ public class LettersIntervalServiceImpl implements LettersIntervalService {
         return response;
     }
 
-    private void saveIntArray(Character[] array) {
+    private void saveCharArray(Character[] array) {
         LettersIntervalEntity saved = intervalRepository.save(
                 LettersIntervalEntity
                         .builder()

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.cft.task_backend.api.dto.MinIntervalResponse;
 import ru.cft.task_backend.core.services.IntervalDispatchService;
-import ru.cft.task_backend.models.enums.IntervalDataType;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,6 @@ public class IntervalController {
     @PostMapping(POST_INTERVAL)
     public void addInterval(@RequestParam String kind, @RequestBody ArrayList<Object[]> request) {
         intervalService.addNewIntervals(request, kind);
-
     }
 
     @Operation(summary = "Find minimum interval", description = "Finds the minimum interval of the specified kind (digits or letters).")

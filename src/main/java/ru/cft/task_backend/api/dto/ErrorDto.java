@@ -1,4 +1,4 @@
-package ru.cft.task_backend.core.exceptions;
+package ru.cft.task_backend.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

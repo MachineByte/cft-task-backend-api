@@ -1,9 +1,7 @@
 package ru.cft.task_backend.api.dto;
 
-import ru.cft.task_backend.models.DigitsIntervalEntity;
-
 /**
- * Marker interface for finding minimal interval
+ * Marker interface for a found minimal interval's dto
  */
 public interface MinIntervalResponse {
 }

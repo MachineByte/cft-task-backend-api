@@ -1,4 +1,4 @@
-package ru.cft.task_backend.core.exceptions;
+package ru.cft.task_backend.api.controllers;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -11,10 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import ru.cft.task_backend.api.dto.ErrorDto;
 
 import java.util.Map;
 
-
+/**
+ * CustomErrorController is a controller that handles errors and provides custom error responses.
+ * It implements the {@link ErrorController} interface and uses Spring Boot's {@link ErrorAttributes}
+ * to extract error details.
+ */
 @Controller
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)

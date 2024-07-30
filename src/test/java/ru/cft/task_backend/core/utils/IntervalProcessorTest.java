@@ -72,7 +72,7 @@ public class IntervalProcessorTest {
     );
 
 
-    Comparator<Integer[]> intComparator = Comparator.comparingInt(arr -> arr[0]);
+    Comparator<Integer[]> intComparator = Comparator.comparing(arr -> arr[0]);
     Comparator<Character[]> charComparator = Comparator.comparing(arr -> arr[0]);
 
 

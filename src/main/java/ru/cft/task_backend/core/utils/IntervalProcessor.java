@@ -1,6 +1,5 @@
 package ru.cft.task_backend.core.utils;
 
-import ru.cft.task_backend.core.exceptions.BadRequestException;
 import ru.cft.task_backend.core.exceptions.BadStateException;
 
 import java.util.*;
@@ -12,10 +11,13 @@ public class IntervalProcessor {
      * Then, it iterates over each element, checking if it intersects with the next element.
      * If so, the current interval is expanded to the upper limit of the current element.
      * If there is no intersection, it assumes that the desired interval has been found and adds it to the output List.
+     * <p>
+     * Algorithm CPU complexity - O(n log(n))
+     * Algorithm Memory complexity - O(n)
      *
      * @param list The list of digit intervals to collapse.
      * @return A list of collapsed digit intervals.
-     * @throws BadRequestException if the intervals are not valid.
+     * @throws BadStateException if the intervals are not valid.
      */
     public static <T extends Comparable<T>> List<T[]> collapseIntersections(List<T[]> list, Comparator<T[]> comparator) {
         List<T[]> result = new ArrayList<>();
