@@ -18,11 +18,11 @@ public class ListConverter {
      * @return A list of typed arrays.
      */
     public static <T> List<T[]> convertToTypedList(List<Object[]> input, Class<T> clazz){
-        List<T[]> ret = new ArrayList<>();
+        List<T[]> resultList = new ArrayList<>();
         for (Object[] i : input){
-            ret.add(convertToArray(i, clazz));
+            resultList.add(convertToArray(i, clazz));
         }
-        return ret;
+        return resultList;
     }
 
     /**

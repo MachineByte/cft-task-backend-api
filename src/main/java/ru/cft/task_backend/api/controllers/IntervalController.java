@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.cft.task_backend.api.dto.MinIntervalResponse;
 import ru.cft.task_backend.core.services.IntervalDispatchService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Tag(name = "Interval Controller", description = "API for managing intervals of digits and letters")
 @RestController
@@ -20,7 +20,7 @@ public class IntervalController {
 
     @Operation(summary = "Add new intervals", description = "Adds new intervals of the specified kind (digits or letters).")
     @PostMapping(POST_INTERVAL)
-    public void addInterval(@RequestParam String kind, @RequestBody ArrayList<Object[]> request) {
+    public void addInterval(@RequestParam String kind, @RequestBody List<Object[]> request) {
         intervalService.addNewIntervals(request, kind);
     }
 
